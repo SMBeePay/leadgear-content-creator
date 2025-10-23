@@ -1,0 +1,7 @@
+"""
+Celery tasks for async operations
+"""
+
+from tasks.celery_app import app as celery_app
+
+__all__ = ["celery_app"]
