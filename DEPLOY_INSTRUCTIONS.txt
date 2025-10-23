@@ -1,0 +1,207 @@
+════════════════════════════════════════════════════════════════
+   LEAD GEAR CONTENT CREATOR - DEPLOY TO VERCEL + RAILWAY
+════════════════════════════════════════════════════════════════
+
+📋 WHAT YOU'LL GET:
+- Live Vercel URL (e.g., https://leadgear-content-creator.vercel.app)
+- Live API URL (e.g., https://leadgear-backend.up.railway.app)
+- Auto-deploy on git push
+- Free tier hosting (~$0-5/month)
+
+⏱️  TIME REQUIRED: ~10-15 minutes total
+
+════════════════════════════════════════════════════════════════
+STEP 1: DEPLOY BACKEND TO RAILWAY (5 minutes)
+════════════════════════════════════════════════════════════════
+
+1. Open https://railway.app/new
+
+2. Sign in with your GitHub account
+
+3. Click "Deploy from GitHub repo"
+
+4. Select your repository: "leadgear-content-creator"
+
+5. Railway will detect the Dockerfile
+
+6. Click on the deployed service, then "Variables" tab
+
+7. Add these environment variables:
+
+   JWT_SECRET=<run this command: openssl rand -hex 32>
+   FRONTEND_URL=https://will-update-after-vercel-deploy.com
+   DATABASE_URL=sqlite:///./data/leadgear.db
+
+8. Click "Settings" tab → Copy the "Public Domain" URL
+   Example: https://leadgear-backend-production.up.railway.app
+
+   ⭐ SAVE THIS URL - YOU'LL NEED IT FOR VERCEL!
+
+════════════════════════════════════════════════════════════════
+STEP 2: DEPLOY FRONTEND TO VERCEL (5 minutes)
+════════════════════════════════════════════════════════════════
+
+OPTION A: Using Vercel CLI (Faster)
+────────────────────────────────────
+1. Install Vercel CLI:
+   npm i -g vercel
+
+2. Login:
+   vercel login
+
+3. Deploy:
+   cd frontend
+   vercel
+
+4. Follow prompts:
+   - Set up and deploy? YES
+   - Which scope? [Your account]
+   - Link to existing project? NO
+   - What's your project's name? leadgear-content-creator
+   - In which directory is your code located? ./
+   - Want to override the settings? NO
+
+5. Add environment variable:
+   vercel env add VITE_API_URL
+
+   When prompted, paste your Railway URL:
+   https://your-backend.up.railway.app
+
+6. Deploy to production:
+   vercel --prod
+
+────────────────────────────────────
+OPTION B: Using Vercel Dashboard
+────────────────────────────────────
+1. Open https://vercel.com/new
+
+2. Import your Git repository
+
+3. Configure project:
+   Framework Preset: Vite
+   Root Directory: frontend
+   Build Command: npm run build
+   Output Directory: dist
+   Install Command: npm install
+
+4. Add Environment Variable:
+   Name: VITE_API_URL
+   Value: [Your Railway URL from Step 1]
+
+5. Click "Deploy"
+
+6. Wait ~2 minutes for deployment
+
+7. Copy your Vercel URL when ready
+   Example: https://leadgear-content-creator.vercel.app
+
+════════════════════════════════════════════════════════════════
+STEP 3: UPDATE BACKEND CORS (2 minutes)
+════════════════════════════════════════════════════════════════
+
+1. Go back to Railway dashboard
+
+2. Click on your backend service
+
+3. Click "Variables" tab
+
+4. UPDATE the FRONTEND_URL variable:
+   FRONTEND_URL=https://your-actual-vercel-url.vercel.app
+
+5. Railway will automatically redeploy (~1 minute)
+
+════════════════════════════════════════════════════════════════
+STEP 4: TEST YOUR DEPLOYMENT! (2 minutes)
+════════════════════════════════════════════════════════════════
+
+1. Open your Vercel URL in a browser
+
+2. Click "Register" and create a test account
+
+3. Login with your credentials
+
+4. Create a test project:
+   - Client Name: "Test HVAC Company"
+   - Website: https://test.com
+   - Industry: HVAC
+   - Click Create
+
+5. If the project appears in your list = SUCCESS! 🎉
+
+════════════════════════════════════════════════════════════════
+YOUR LIVE URLs
+════════════════════════════════════════════════════════════════
+
+Frontend:  https://[your-app].vercel.app
+Backend:   https://[your-backend].up.railway.app
+API Docs:  https://[your-backend].up.railway.app/docs
+
+════════════════════════════════════════════════════════════════
+TROUBLESHOOTING
+════════════════════════════════════════════════════════════════
+
+❌ "Network Error" when logging in
+   → Check VITE_API_URL is set correctly in Vercel
+   → Verify Railway backend is running (green in dashboard)
+
+❌ "CORS Error" in browser console
+   → Check FRONTEND_URL in Railway matches your Vercel URL exactly
+   → Make sure both URLs use https:// (not http://)
+
+❌ Vercel build fails
+   → Check deployment logs in Vercel dashboard
+   → Try building locally first: cd frontend && npm run build
+
+❌ Railway deployment fails
+   → Check deployment logs in Railway dashboard
+   → Verify Dockerfile exists in backend directory
+
+════════════════════════════════════════════════════════════════
+NEXT STEPS (OPTIONAL)
+════════════════════════════════════════════════════════════════
+
+□ Add PostgreSQL database in Railway (recommended for production)
+□ Add Redis in Railway (for background tasks)
+□ Add API keys as you get them (Claude, DataForSEO, etc.)
+□ Set up custom domain (Vercel: Settings → Domains)
+□ Enable auto-deploy (already configured!)
+
+════════════════════════════════════════════════════════════════
+HELPFUL COMMANDS
+════════════════════════════════════════════════════════════════
+
+# View Vercel deployments
+vercel ls
+
+# View Vercel logs
+vercel logs
+
+# Redeploy to Vercel
+cd frontend && vercel --prod
+
+# View Railway logs
+# (In Railway dashboard → Deployments → View Logs)
+
+# Trigger Railway redeploy
+git push origin main
+
+════════════════════════════════════════════════════════════════
+NEED MORE HELP?
+════════════════════════════════════════════════════════════════
+
+📖 Quick Start:           DEPLOY_NOW.md
+📖 Full Guide:            DEPLOYMENT.md
+📖 Architecture:          IMPLEMENTATION_GUIDE.md
+📖 Local Development:     QUICKSTART.md
+
+💬 Vercel Support:        https://vercel.com/support
+💬 Railway Support:       https://help.railway.app
+
+════════════════════════════════════════════════════════════════
+
+🚀 Ready to deploy! Follow the steps above and you'll have a
+   live URL in about 10 minutes.
+
+   Good luck! 🎉
+
+════════════════════════════════════════════════════════════════
