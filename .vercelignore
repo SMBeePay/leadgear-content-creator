@@ -1,0 +1,19 @@
+# Don't deploy backend files to Vercel
+backend/
+docker-compose.yml
+*.db
+*.sqlite
+*.sqlite3
+
+# Development files
+.env
+.env.local
+.env.development
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Documentation (optional - remove if you want docs on Vercel)
+# DEPLOYMENT.md
+# IMPLEMENTATION_GUIDE.md
